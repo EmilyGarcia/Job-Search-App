@@ -1,60 +1,43 @@
-#from urllib2 import urlopen
-import requests
-import json
 from pprint import pprint
 from tkinter import *
-#def callback():
-#    print ('City Entered')
+import tkinter as tk
+import tkinter.messagebox
+from functools import partial
+from functions import *
 
-#top = Tk()
-#L1 = Label(top, text="City")
-#L1.grid(row=0, column=0)
-#E1 = Entry(top, bd = 5)
-#E1.grid(row=0, column=1)
+###################################################################################################################################
+##############################################              GUI              ######################################################
+###################################################################################################################################
 
-#MyButton1 = Button(top, text="Submit", width=10, command=callback)
-#MyButton1.grid(row=1, column=1)
-
-#top.mainloop()
-
-
-def show_entry_fields():
-   print("City: %s" % e1.get())
-
+# main gui window
 master = Tk()
-Label(master, text="City").grid(row=0) #creates city prompt
 
-e1 = Entry(master) # creates entry box
+# enter city prompt
+Label(master, text="City").grid(row=0)
 
-e1.grid(row=0, column=1) # assigns box location
+# entry box
+e1 = Entry(master)
+e1.grid(row=0, column=1) # assigns location in master
 
-city = e1.get()
+# finds five job listings
+jobs = partial(displayJobs, e1, master)
+Button(master, text="Find", command=jobs).grid(row=0, column=2, sticky=W, pady=4)
 
-# making request github jobs
-payload = {'location': city}
-ourRequest = requests.get('http://jobs.github.com/positions.json?', params=payload)
-result = ourRequest.json()
+# initial buttons w/ default text
+b1 = Button(master, text= "Job 1", width= 40)
+b1.grid(row=4, column=0, sticky=W, pady=4)
+b2 = Button(master, text= "Job 2", width= 40)
+b2.grid(row=5, column=0, sticky=W, pady=4)
+b3 = Button(master, text= "Job 3", width= 40)
+b3.grid(row=6, column=0, sticky=W, pady=4)
+b4 = Button(master, text= "Job 4", width= 40)
+b4.grid(row=7, column=0, sticky=W, pady=4)
+b5 = Button(master, text= "Job 5", width= 40)
+b5.grid(row=8, column=0, sticky=W, pady=4)
 
-#take first five jobs results
-job1 = result[0]
-job2 = result[1]
-job3 = result[2]
-job4 = result[3]
-job5 = result[4]
-
-Button(master, text='Show', command=show_entry_fields).grid(row=3, column=2, sticky=W, pady=4)
-
-#Button(master, text= job1['title']).grid(row=4, column=0, sticky=W, pady=4)
-#Button(master, text= job2['title']).grid(row=5, column=0, sticky=W, pady=4)
-#Button(master, text= job3['title']).grid(row=6, column=0, sticky=W, pady=4)
-#Button(master, text= job4['title']).grid(row=7, column=0, sticky=W, pady=4)
-#Button(master, text= job5['title']).grid(row=8, column=0, sticky=W, pady=4)
-
-Button(master, text='Quit', command=master.quit).grid(row=4, column=1, sticky=W, pady=4)
+Button(master, text='Map', width= 10).grid(row=9, column=0, sticky=W, pady=4)
+Button(master, text='Quit', command=master.quit, width= 10).grid(row=9, column=1, sticky=W, pady=4)
 
 mainloop( )
-
-pprint(result[0])
-print(ourRequest.url)
 
 
