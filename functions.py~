@@ -3,10 +3,11 @@ import tkinter as tk
 import requests
 import json
 from functools import partial
+import map
 
-###################################################################################################################################
-##############################################           FUNCTIONS           ######################################################
-###################################################################################################################################
+##################################################################################################################################
+##############################################           FUNCTIONS          ######################################################
+##################################################################################################################################
 
 def openDescription1( job1 ):
 	descWindow1 = Tk()
@@ -54,6 +55,7 @@ def displayJobs( entry, master ):
 	result = makeRequest( entry )
 	
 	# Take first five jobs results
+	global job1, job2, job3, job4, job5
 	job1 = result[0]
 	job2 = result[1]
 	job3 = result[2]
@@ -89,15 +91,18 @@ def displayJobs( entry, master ):
 	
 	b5 = Button( master, command= desc5, text= job5['title'], width= 40 )
 	b5.grid( row=8, column=0, sticky=W, pady=4 )
-def getLat():
+"""def getLat():
 	
 def getLon():
 	
-#def mapThat():
+def mapThat():
 	lons = [-135.3318, -134.8331, -134.6572]
 	lats = [57.0799, 57.0894, 56.2399]
 	x,y = map(lons, lats)
 	map.plot(x, y, 'bo', markersize=10)
-
 	
-
+	labels = [job1['title'], job2['title'], job3['title'], job4['title']]
+	for label, xpt, ypt in zip(labels, x, y):
+    		plt.text(xpt+10000, ypt+5000, label)
+	
+"""

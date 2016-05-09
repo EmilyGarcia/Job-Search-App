@@ -20,11 +20,5 @@ map.drawcountries()
 map.fillcontinents(color='coral')
 map.drawmapboundary()
 map.drawstates()
-
-lon = -121.655502
-lat = 36.677738
-x,y = map(lon, lat)
-map.plot(x, y, 'bo', markersize=12)
-
  
 plt.show()
