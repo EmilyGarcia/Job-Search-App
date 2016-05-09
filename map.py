@@ -6,7 +6,8 @@ import numpy as np
 ##############################################              MAP              ######################################################
 ###################################################################################################################################
 
-
+def mapThat():
+	
 # make sure the value of resolution is a lowercase L,
 #  for 'low', not a numeral 1
 map = Basemap(projection='mill', lat_0=36, lon_0=-119,
@@ -19,11 +20,5 @@ map.drawcountries()
 map.fillcontinents(color='coral')
 map.drawmapboundary()
 map.drawstates()
-
-lon = -121.655502
-lat = 36.677738
-x,y = map(lon, lat)
-map.plot(x, y, 'bo', markersize=12)
-
  
 plt.show()
