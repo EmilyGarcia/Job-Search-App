@@ -1,42 +1,44 @@
-from tkinter import *
-import tkinter as tk
+from Tkinter import *
+import Tkinter
 import requests
 import json
 from functools import partial
-
+from mpl_toolkits.basemap import Basemap
+import matplotlib.pyplot as plt
+import numpy as np
 ##################################################################################################################################
 ##############################################           FUNCTIONS          ######################################################
 ##################################################################################################################################
 
 def openDescription1( job1 ):
-	descWindow1 = Tk()
+	descWindow1 = Tkinter.Tk()
 	jobDesc1 = job1['description']
 	print (job1['location'])
 	msg1 = Message(descWindow1, text= jobDesc1)
 	msg1.config(bg='lightgray', font=('times', 12))
 	msg1.pack()
 def openDescription2( job2 ):
-	descWindow2 = Tk()
+	descWindow2 = Tkinter.Tk()
 	jobDesc2 = job2['description']
 	print (job2['location'])
 	msg2 = Message(descWindow2, text= jobDesc2)
 	msg2.config(bg='lightgray', font=('times', 12))
 	msg2.pack()
 def openDescription3( job3 ):
-	descWindow3 = Tk()
+	descWindow3 = Tkinter.Tk()
 	jobDesc3 = job3['description']
 	print (job3['location'])
 	msg3 = Message(descWindow3, text= jobDesc3)
 	msg3.config(bg='lightgray', font=('times', 12))
 	msg3.pack()
 def openDescription4( job4 ):
-	descWindow4 = Tk()
+	descWindow4 = Tkinter.Tk()
 	jobDesc4 = job4['description']
 	msg4 = Message(descWindow4, text= jobDesc4)
 	msg4.config(bg='lightgray', font=('times', 12))
 	msg4.pack()
 def openDescription5( job5 ):
-	descWindow5 = Tk()
+	descWindow5 = Tkinter.Tk()
 	jobDesc5 = job5['description']
 	msg5 = Message(descWindow5, text= jobDesc5)
 	msg5.config(bg='lightgray', font=('times', 12))
@@ -93,15 +95,29 @@ def displayJobs( entry, master ):
 """def getLat():
 	
 def getLon():
-	
+"""	
+
 def mapThat():
-	lons = [-135.3318, -134.8331, -134.6572]
-	lats = [57.0799, 57.0894, 56.2399]
-	x,y = map(lons, lats)
-	map.plot(x, y, 'bo', markersize=10)
+	# make sure the value of resolution is a lowercase L,
+	#  for 'low', not a numeral 1
+	mapp = Basemap(projection='mill', lat_0=36, lon_0=-119,
+	    resolution = 'h', area_thresh = .1,
+	    llcrnrlon=-130, llcrnrlat=31,
+	    urcrnrlon=-109, urcrnrlat=43)
+	 
+	mapp.drawcoastlines()
+	mapp.drawcountries()
+	mapp.fillcontinents(color='coral')
+	mapp.drawmapboundary()
+	mapp.drawstates()
+	 
 	
-	labels = [job1['title'], job2['title'], job3['title'], job4['title']]
+	lons = [-120, -119, -110]
+	lats = [32, 36, 40]
+	x,y = mapp(lons, lats)
+	mapp.plot(x, y, 'bo', markersize=10)
+	
+	labels = [job1['title'], job2['title'], job3['title']]
 	for label, xpt, ypt in zip(labels, x, y):
     		plt.text(xpt+10000, ypt+5000, label)
-	
-"""
+	plt.show()
